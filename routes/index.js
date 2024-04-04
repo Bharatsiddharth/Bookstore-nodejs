@@ -26,4 +26,9 @@ router.get('/about', function(req, res, next) {
   res.render('About');
 });
 
+router.get('/delete/:idx', function(req, res, next) {
+    Books.splice(req.params.idx, 1);
+    res.redirect("/readall")
+});
+
 module.exports = router;
