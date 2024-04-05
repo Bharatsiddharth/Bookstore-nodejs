@@ -1,23 +1,43 @@
 <%- include("./partials/header") %>
-
-
   
 <h1 class="Heading">Book Store Library</h1>
 
-    <% books.forEach(function(book, idx){ %>
-        <h1><%= book.book %></h1>
-        <h1><%= book.author %></h1>
-        <h1><%= book.price %></h1>
-        <h1><%= book.qua %></h1>
-        <h1><%= book.lan %></h1>
-        <h1><%= book.cat %></h1>
-
-        <a href="/delete/<%= idx %>">delete</a>
-        <a href="/update/<%= idx %>">update</a>
-        
-    <% }) %>
-
- 
 
 
+    
+
+           <div class="cards_container ">
+
+            <% books.forEach(function(book, idx){ %>
+                
+                <div class="cards rounded-5">
+
+                    <h3 class="fs-1 text-center"><%= book.book %></h3>
+                    <h3 class="fs-2 text-center"><%= book.author %></h3>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <h3 class="fs-4">P - <%= book.price %></h3>
+                        <h3 class="fs-4">Q - <%= book.qua %></h3>
+                    </div>
+
+                    <h3 class="fs-5"><%= book.lan %></h3>
+                    <h3 class="fs-5"><%= book.cat %></h3>
+                    <p class="">description - <%= book.description %> </p>
+            
+                    <div class="btn-container">
+                        <button class="btn btn-primary"><a href="/delete/<%= idx %>">delete</a></button>
+                        <button class="btn btn-danger"><a href="/update/<%= idx %>">update</a></button>
+            
+                    </div>
+
+                </div>
+         
+                 
+             <% }) %>
+
+           </div>
+         
+
+   
+   
   <%- include("./partials/footer") %>

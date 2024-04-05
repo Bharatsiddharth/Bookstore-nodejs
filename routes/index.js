@@ -31,4 +31,10 @@ router.get('/delete/:idx', function(req, res, next) {
     res.redirect("/readall")
 });
 
+router.get('/update/:idx', function(req, res, next) {
+  const i = req.params.idx;
+  const b = Books[req.params.idx]
+  res.render("update",{book_data:b, index:i})
+});
+
 module.exports = router;

@@ -7,8 +7,12 @@
 html,body{
   height: 100%;
   width: 100%;
+ 
 }
 
+.custom-bg {
+  background-color: rgba(232, 232, 232, 0.628); /* Gray color with 50% opacity */
+}
 
 nav a{
   font-size: 1.5vw;
@@ -16,8 +20,42 @@ nav a{
   color: white;
 }
 
+.btn-container a{
+  font-size: 1vw;
+  text-decoration: none;
+  color: white;
+}
+
+.cards{
+  width: 20vw;
+  height: 55vh;
+  background: white;
+  padding: 15px;
+  box-shadow:  12px 12px 24px #a6a6a6,
+               -12px -12px 24px #ffffff;
+}
+
+.cards h3{
+  /* font-size: 1.5vw; */
+}
+
+.cards_container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  
+  padding: 0 7vw;
+  flex-wrap: wrap; /* Allow cards to wrap to the next line */
+  gap: 20px;
+}
+
+
+
 .Heading{
   margin-left: 3vw;
+  text-align: center;
+  font-size: 3vw;
+  padding: 3vw;
 }
 
 form{
