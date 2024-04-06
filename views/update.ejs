@@ -4,7 +4,7 @@
   
 <h1 class="Heading text-center">Book Store Entry</h1>
 
-<form class="container bg-secondary-subtle  mt-2 p-2 bg-light" action="/create" method="post">
+<form class="container bg-secondary-subtle  mt-2 p-2 bg-light" action="/update/<%= index %>" method="post">
   <input class="form-control" type="text" placeholder="Book Name" name="book" value="<%= book_data.book %>"> <br>
   <input class="form-control" type="text" placeholder="Author Name" name="author" value="<%= book_data.author%>"  > <br>
   <input class="form-control" type="text" placeholder="Book Price" name="price" value="<%=book_data.price%>" > <br>

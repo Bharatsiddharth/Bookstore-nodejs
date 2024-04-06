@@ -11,11 +11,16 @@ html,body{
 }
 
 .custom-bg {
-  background-color: rgba(232, 232, 232, 0.628); /* Gray color with 50% opacity */
+  background-color: rgba(212, 212, 212, 0.628); /* Gray color with 50% opacity */
+}
+
+nav{
+  padding: 20px 250px;
+  font-family: monospace;
 }
 
 nav a{
-  font-size: 1.5vw;
+  font-size: 2vw;
   text-decoration: none;
   color: white;
 }
@@ -31,8 +36,10 @@ nav a{
   height: 55vh;
   background: white;
   padding: 15px;
-  box-shadow:  12px 12px 24px #a6a6a6,
-               -12px -12px 24px #ffffff;
+  border: 1px solid black;
+  box-shadow:  20px 20px 20px #777777,
+             -20px -20px 20px #ffffff;
+
 }
 
 .cards h3{
@@ -41,7 +48,7 @@ nav a{
 
 .cards_container {
   width: 100%;
-  min-height: 100vh;
+  min-height: 50vh;
   display: flex;
   
   padding: 0 7vw;
@@ -56,6 +63,8 @@ nav a{
   text-align: center;
   font-size: 3vw;
   padding: 3vw;
+  font-weight: 900;
+  font-family: cursive;
 }
 
 form{

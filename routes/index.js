@@ -37,4 +37,10 @@ router.get('/update/:idx', function(req, res, next) {
   res.render("update",{book_data:b, index:i})
 });
 
+router.post('/update/:idx', function(req, res, next) {
+  const i = req.params.idx;
+  Books[i] = req.body;
+  res.redirect("/readall")
+});
+
 module.exports = router;
