@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const Book = require("../models/bookmodel");
+
 const Books = []
 
 /* GET home page. */
@@ -13,13 +15,22 @@ router.get('/create', function(req, res, next) {
 });
 
 router.post('/create', function(req, res, next) {
-  Books.push(req.body);
-  res.redirect("/readall")
-  console.log(Books);
+  // Books.push(req.body);
+  
+
+  Book.create(req.body)
+      .then(() => {
+        res.redirect("/readall")
+      }).catch((err) => res.send(err))
+
+  // console.log(Books);
 });
 
 router.get('/readall', function(req, res, next) {
-  res.render('Library', {books:Books});
+  Book.find() 
+    .then((book) => {
+      res.render('Library', {books:book});
+    }).catch((err) => res.send(err));
 });
 
 router.get('/about', function(req, res, next) {
