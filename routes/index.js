@@ -18,10 +18,18 @@ router.post('/create', function(req, res, next) {
   // Books.push(req.body);
   
 
-  Book.create(req.body)
-      .then(() => {
-        res.redirect("/readall")
-      }).catch((err) => res.send(err))
+  // Book.create(req.body)
+  //     .then(() => {
+  //       res.redirect("/readall")
+  //     }).catch((err) => res.send(err))
+
+  try {
+    const newbook = new Book(req.body);
+    await newbook.save();
+    res.redirect("/readall");
+} catch (error) {
+    res.send(error);
+}
 
   // console.log(Books);
 });
