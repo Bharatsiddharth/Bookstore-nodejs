@@ -14,7 +14,7 @@ router.get('/create', function(req, res, next) {
   res.render('create');
 });
 
-router.post('/create', function(req, res, next) {
+router.post('/create', async function(req, res, next) {
   // Books.push(req.body);
   
 
@@ -45,15 +45,30 @@ router.get('/about', function(req, res, next) {
   res.render('About');
 });
 
-router.get('/delete/:idx', function(req, res, next) {
-    Books.splice(req.params.idx, 1);
-    res.redirect("/readall")
+router.get('/delete/:idx', async function(req, res, next) {
+      try {
+        await Books.findByIdAndDelete(req.params.id);
+        res.redirect("/readall");
+    } catch (error) {
+        res.send(error);
+    }
+
+    // Books.splice(req.params.idx, 1);
+    // res.redirect("/readall")
 });
 
-router.get('/update/:idx', function(req, res, next) {
-  const i = req.params.idx;
-  const b = Books[req.params.idx]
-  res.render("update",{book_data:b, index:i})
+router.get('/update/:idx',async function(req, res, next) {
+
+      try {
+        const book = await Books.findById(req.params.id);
+        res.render("update", { book: book });
+    } catch (error) {
+        res.send(error);
+    }
+
+  // const i = req.params.idx;
+  // const b = Books[req.params.idx]
+  // res.render("update",{book_data:b, index:i})
 });
 
 router.post('/update/:idx', function(req, res, next) {
