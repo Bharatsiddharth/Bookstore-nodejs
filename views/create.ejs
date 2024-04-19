@@ -4,7 +4,8 @@
   
 <h1 class="Heading text-center">Book Store Entry</h1>
 
-<form class="container bg-secondary-subtle  mt-2 p-2 bg-light" action="/create" method="post">
+<form class="container bg-secondary-subtle  mt-2 p-2 bg-light" action="/create" method="post" enctype="multipart/form-data">
+  <input class="form-control" type="file" placeholder="Image" name="image"> <br>
   <input class="form-control" type="text" placeholder="Book Name" name="book"> <br>
   <input class="form-control" type="text" placeholder="Author Name" name="author"> <br>
   <input class="form-control" type="text" placeholder="Book Price" name="price"> <br>

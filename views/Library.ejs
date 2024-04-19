@@ -2,10 +2,6 @@
   
 <h1 class="Heading">Book Store Library</h1>
 
-
-
-    
-
            <div class="cards_container ">
 
             <% books.forEach(function(book, idx){ %>
@@ -25,8 +21,8 @@
                     <p class="">description - <%= book.description %> </p>
             
                     <div class="btn-container">
-                        <button class="btn btn-primary"><a href="/delete/<%= idx %>">delete</a></button>
-                        <button class="btn btn-danger"><a href="/update/<%= idx %>">update</a></button>
+                        <button class="btn btn-primary"><a href="/delete/<%= book._id %>">delete</a></button>
+                        <button class="btn btn-danger"><a href="/update/<%= book._id %>">update</a></button>
             
                     </div>
 
