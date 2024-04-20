@@ -26,7 +26,8 @@ router.post('/create', async function(req, res, next) {
 
   try {
     // const newbook = new Book(req.body);
-    const newbook = new Book({...req.body, image: req.file.filename})
+    // res.json({ body: req.body, file: req.file });
+    const newbook = new Books({ ...req.body, image: req.file.filename });
     await newbook.save();
     res.redirect("/readall");
 } catch (error) {
@@ -39,6 +40,7 @@ router.post('/create', async function(req, res, next) {
 router.get('/readall', async function(req, res, next) {
     try {
       const allbooks = await Book.find();
+      console.log(allbooks);
       res.render("Library", {books: allbooks})
     } catch (error) {
       res.send(error);
@@ -61,24 +63,30 @@ router.get('/delete/:id', async function(req, res, next) {
     // res.redirect("/readall")
 });
 
-router.get('/update/:idx',async function(req, res, next) {
+router.get('/update/:id',async function(req, res, next) {
 
       try {
         const book = await Book.findById(req.params.id);
         res.render("update", { book: book });
-      } catch (error) {
+    } catch (error) {
         res.send(error);
-      }
+    }
 
   // const i = req.params.idx;
   // const b = Books[req.params.idx]
   // res.render("update",{book_data:b, index:i})
 });
 
-router.post('/update/:idx', function(req, res, next) {
-  const i = req.params.idx;
-  Books[i] = req.body;
-  res.redirect("/readall")
+router.post('/update/:idx',async function(req, res, next) {
+  try {
+    await Book.findByIdAndUpdate(req.params.id, req.body);
+    res.redirect("/readall");
+} catch (error) {
+    res.send(error);
+}
+  // const i = req.params.idx;
+  // Books[i] = req.body;
+  // res.redirect("/readall")
 });
 
 module.exports = router;
