@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
-
-// const upload = require("utils/multer");
 const Book = require("../models/bookmodel");
+
+const fs = require("fs");
+const path = require("path");
+
+const upload = require("../utils/multer").single("image")
 
 // const Books = []
 
@@ -15,7 +18,7 @@ router.get('/create', function(req, res, next) {
   res.render('create');
 });
 
-router.post('/create', async function(req, res, next) {
+router.post('/create', upload, async function(req, res, next) {
   // Books.push(req.body);
   
 
@@ -25,9 +28,7 @@ router.post('/create', async function(req, res, next) {
   //     }).catch((err) => res.send(err))
 
   try {
-    // const newbook = new Book(req.body);
-    // res.json({ body: req.body, file: req.file });
-    const newbook = new Books({ ...req.body, image: req.file.filename });
+    const newbook = new Book({ ...req.body, image: req.file.filename });
     await newbook.save();
     res.redirect("/readall");
 } catch (error) {
@@ -53,14 +54,14 @@ router.get('/about', function(req, res, next) {
 
 router.get('/delete/:id', async function(req, res, next) {
       try {
-        await Book.findByIdAndDelete(req.params.id);
+        const book = await Book.findByIdAndDelete(req.params.id);
+        fs.unlinkSync(
+          path.join(__dirname, "..", "public" ,"images", book.image)
+        )
         res.redirect("/readall");
     } catch (error) {
         res.send(error);
     }
-
-    // Books.splice(req.params.idx, 1);
-    // res.redirect("/readall")
 });
 
 router.get('/update/:id',async function(req, res, next) {
@@ -71,22 +72,16 @@ router.get('/update/:id',async function(req, res, next) {
     } catch (error) {
         res.send(error);
     }
-
-  // const i = req.params.idx;
-  // const b = Books[req.params.idx]
-  // res.render("update",{book_data:b, index:i})
 });
 
-router.post('/update/:idx',async function(req, res, next) {
-  try {
-    await Book.findByIdAndUpdate(req.params.id, req.body);
-    res.redirect("/readall");
-} catch (error) {
-    res.send(error);
-}
-  // const i = req.params.idx;
-  // Books[i] = req.body;
-  // res.redirect("/readall")
+router.post('/update/:id',async function(req, res, next) {
+    try {
+        await Book.findByIdAndUpdate(req.params.id, req.body);
+        res.redirect("/readall");
+    } catch (error) {
+        res.send(error);
+    }
+ 
 });
 
 module.exports = router;
