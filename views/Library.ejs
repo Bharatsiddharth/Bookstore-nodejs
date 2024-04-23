@@ -1,38 +1,45 @@
 <%- include("./partials/header") %>
   
 <h1 class="Heading">Book Store Library</h1>
-
-           <div class="cards_container ">
-
-            <% books.forEach(function(book, idx){ %>
-                
-                <div class="cards rounded-5">
-                    <img class="images" src="/images/<%= book.image %>" alt="">
-
-                    <h3 class="fs-1 text-center"><%= book.book %></h3>
-                    <h3 class="fs-2 text-center fw-bold text-secondary"><%= book.author %></h3>
-
-                    <div class="d-flex justify-content-between mt-4">
-                        <h3 class="fs-4">P - <%= book.price %></h3>
-                        <h3 class="fs-4">Q - <%= book.qua %></h3>
-                    </div>
-
-                    <h3 class="fs-5"><%= book.lan %></h3>
-                    <h3 class="fs-5"><%= book.cat %></h3>
-                    <p class="">description - <%= book.description %> </p>
-            
-                    <div class="btn-container">
-                        <button class="btn btn-primary"><a href="/delete/<%= book._id %>">delete</a></button>
-                        <button class="btn btn-danger"><a href="/update/<%= book._id %>">update</a></button>
-            
-                    </div>
-
-                </div>
          
-                 
-             <% }) %>
+           <div class="d-flex flex-wrap container bg-light  p-5 ">
+            <% books.forEach(function(book, idx){ %>
+                <div class="card me-3 mb-3" style="width: 18rem">
+                    <img width="w-100" style="height: 200px; object-fit: cover; object-position: center;"
+                        src="/images/<%= book.image %>" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= book.book%>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                            <%= book.author%>
+                        </h6>
 
-           </div>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                            <%= book.price%>
+                        </h6>
+
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                            <%= book.qua%>
+                        </h6>
+
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                            <%= book.lan%>
+                        </h6>
+
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                            <%= book.cat %>
+                        </h6>
+
+                        <p class="card-text">
+                            <%= book.description%>
+                        </p>
+                        <a href="/delete/<%= book._id%>" class="card-link text-danger">Delete Book</a>
+                        <a href="/update/<%= book._id%>" class="card-link">Update Book</a>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
          
 
    

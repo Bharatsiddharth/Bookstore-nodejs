@@ -4,9 +4,12 @@
   
 <h1 class="Heading text-center">Book Store Entry</h1>
 
-<form class="container bg-secondary-subtle  mt-2 p-2 bg-light" action="/update/<%= book._id %>" method="post">
+<form class="container bg-secondary-subtle  mt-2 p-2 bg-light" action="/update/<%= book._id %>" method="post"
+  enctype="multipart/form-data">
 
   <div class="mb-3"><img width="200" src="/images/<%=book.image%>" alt=""></div>
+
+  <input type="hidden" name="oldimage" value="<%= book.image %>">
 
   <input class="form-control mb-3" type="file" name="image" />
 

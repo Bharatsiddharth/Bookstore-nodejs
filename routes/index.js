@@ -41,7 +41,7 @@ router.post('/create', upload, async function(req, res, next) {
 router.get('/readall', async function(req, res, next) {
     try {
       const allbooks = await Book.find();
-      console.log(allbooks);
+      // console.log(allbooks);
       res.render("Library", {books: allbooks})
     } catch (error) {
       res.send(error);
@@ -74,9 +74,18 @@ router.get('/update/:id',async function(req, res, next) {
     }
 });
 
-router.post('/update/:id',async function(req, res, next) {
+router.post('/update/:id',upload, async function(req, res, next) {
     try {
-        await Book.findByIdAndUpdate(req.params.id, req.body);
+
+        const  updatedata = {...req.body};
+        if(req.file){
+          updatedata.image = req.file.filename;
+          fs.unlinkSync(
+            path.join(__dirname, "..", "public" ,"images", req.body.oldimage)
+          )
+        }
+
+        await Book.findByIdAndUpdate(req.params.id, updatedata);
         res.redirect("/readall");
     } catch (error) {
         res.send(error);
