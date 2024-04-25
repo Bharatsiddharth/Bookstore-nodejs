@@ -11,6 +11,19 @@ const storage = multer.diskStorage({
 
 })
 
+const filefilter = (req, file, cb) => {
+    let allowedfiles = /png|jpg|jpeg|svg|gif/;
+    let minetype = allowedfiles.test(file.mimetype);
+    let extname = allowedfiles.test(
+        path.extname(file.originalname).toLowerCase()
+    );
 
-const upload = multer({ storage: storage});
+    if (extname && minetype) {
+        cb(null, true);
+    } else {
+        cb(`Error: only ${allowedfiles} image extension allowed`);
+    }
+}
+
+const upload = multer({ storage: storage, fileFilter: filefilter });
 module.exports = upload

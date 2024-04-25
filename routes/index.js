@@ -18,7 +18,7 @@ router.get('/create', function(req, res, next) {
   res.render('create');
 });
 
-  router.post('/create',upload,  async function(req, res, next) {
+  router.post('/create',  async function(req, res, next) {
     // Books.push(req.body);
     
 
@@ -28,15 +28,26 @@ router.get('/create', function(req, res, next) {
     //     }).catch((err) => res.send(err))
 
 
-   
-
     try {
-      const newbook = new Book({ ...req.body, image: req.file.filename });
-      await newbook.save();
-      res.redirect("/readall");
+        upload(req,res, async function(error) {
+        if(error) {
+          return res.send(error)
+        }
+        const newbook = new Book({ ...req.body, image: req.file.filename });
+        await newbook.save();
+        res.redirect("/readall");
+      })
   } catch (error) {
       res.send(error);
   }
+
+  //   try {
+  //     const newbook = new Book({ ...req.body, image: req.file.filename });
+  //     await newbook.save();
+  //     res.redirect("/readall");
+  // } catch (error) {
+  //     res.send(error);
+  // }
 
     // console.log(Books);
   });
